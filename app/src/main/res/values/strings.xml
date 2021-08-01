@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">Lista de Compras em Mercados</string>
+    <string name="app_name">Cadastro de Item de Compra</string>
+    <string name="nome_do_item">Nome do Item</string>
+    <string name="marca">Marca</string>
+    <string name="quantidade_na_embalagem">Quantidade na Embalagem</string>
+    <string name="unidade_de_medida">Unidade de Medida</string>
+    <string name="tipo_de_embalagem">Tipo de Embalagem</string>
+    <string name="utensilio">Utensílio</string>
+    <string name="alimento">Alimento</string>
+    <string name="outro">Outro</string>
+    <string name="item_de_cesta_basica">Item de Cesta Básica</string>
+    <string name="limpar">Limpar</string>
+    <string name="salvar">Salvar</string>
 </resources>
