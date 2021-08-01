@@ -12,4 +12,5 @@
     <string name="limpar">Limpar</string>
     <string name="salvar">Salvar</string>
     <string name="todos_os_campos_foram_limpos">Todos os campos foram limpos</string>
+    <string name="nome_do_item_nao_pode_ser_vazio">Nome do Item não pode ser vazio</string>
 </resources>
