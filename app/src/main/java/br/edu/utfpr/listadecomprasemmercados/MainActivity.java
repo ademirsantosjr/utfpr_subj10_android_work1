@@ -4,12 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private EditText editTextNomeDoItem;
+
+    private Spinner spinnerUnidadesDeMedida;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         editTextNomeDoItem = findViewById(R.id.editTextNomeDoItem);
+        spinnerUnidadesDeMedida = findViewById(R.id.spinnerUnidadesDeMedida);
+
+        popularUnidadesDeMedida();
     }
 
     public void limparCampos(View view) {
@@ -27,6 +37,22 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this,
                 R.string.todos_os_campos_foram_limpos,
                 Toast.LENGTH_LONG).show();
+    }
+
+    private void popularUnidadesDeMedida() {
+        List<String> lista = new ArrayList<>();
+
+        lista.add(getString(R.string.unidade));
+        lista.add(getString(R.string.miligrama));
+        lista.add(getString(R.string.grama));
+        lista.add(getString(R.string.quilograma));
+        lista.add(getString(R.string.mililitro));
+        lista.add(getString(R.string.litro));
+
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, lista);
+
+        spinnerUnidadesDeMedida.setAdapter(adapter);
     }
 
     public void mostrarItemCadastrado(View view) {
@@ -41,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Toast.makeText(this,
-                nomeDoItem.trim(), Toast.LENGTH_LONG).show();
+                nomeDoItem.trim(),
+                Toast.LENGTH_LONG).show();
     }
 }

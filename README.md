@@ -1,6 +1,6 @@
 ## Preparação para desenvolvimento de uma Lista de Compras, para dispositivos móveis Android
 ### Objetivo
-* Desenvolver um cadastro de itens, para mais tarde integrá-lo à uma lista de compras
+* Desenvolver um cadastro de itens para mais tarde integrá-lo à uma lista de compras
 ### Linguagem
 * Java
 ### Ambiente de desenvolvimento

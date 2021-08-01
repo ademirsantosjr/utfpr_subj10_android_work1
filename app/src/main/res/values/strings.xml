@@ -13,4 +13,11 @@
     <string name="salvar">Salvar</string>
     <string name="todos_os_campos_foram_limpos">Todos os campos foram limpos</string>
     <string name="nome_do_item_nao_pode_ser_vazio">Nome do Item não pode ser vazio</string>
+
+    <string name="unidade">un</string>
+    <string name="miligrama">mg</string>
+    <string name="grama">g</string>
+    <string name="quilograma">kg</string>
+    <string name="mililitro">mL</string>
+    <string name="litro">L</string>
 </resources>
