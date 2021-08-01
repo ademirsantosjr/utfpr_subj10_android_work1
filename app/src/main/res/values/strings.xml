@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Cadastro de Item de Compra</string>
+    <string name="app_name">Cadastrar Item de Compra</string>
     <string name="nome_do_item">Nome do Item</string>
     <string name="marca">Marca</string>
     <string name="quantidade_na_embalagem">Quantidade na Embalagem</string>
@@ -11,4 +11,5 @@
     <string name="item_de_cesta_basica">Item de Cesta Básica</string>
     <string name="limpar">Limpar</string>
     <string name="salvar">Salvar</string>
+    <string name="todos_os_campos_foram_limpos">Todos os campos foram limpos</string>
 </resources>
