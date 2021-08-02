@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -18,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Spinner spinnerUnidadesDeMedida;
 
+    private RadioGroup radioGroupCategoria;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         editTextNomeDoItem = findViewById(R.id.editTextNomeDoItem);
         spinnerUnidadesDeMedida = findViewById(R.id.spinnerUnidadesDeMedida);
+        radioGroupCategoria = findViewById(R.id.radioGroupCategoria);
 
         popularUnidadesDeMedida();
     }
@@ -57,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void mostrarItemCadastrado(View view) {
         String nomeDoItem = editTextNomeDoItem.getText().toString();
+        String categoria = getCategoria();
 
         if (nomeDoItem == null || nomeDoItem.trim().isEmpty()) {
             Toast.makeText(this,
@@ -66,8 +71,33 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
+        if (categoria == null) {
+            Toast.makeText(this,
+                    R.string.categoria_deve_ser_selecionada,
+                    Toast.LENGTH_LONG).show();
+            radioGroupCategoria.requestFocus();
+            return;
+        }
+
         Toast.makeText(this,
-                nomeDoItem.trim(),
+                nomeDoItem.trim() + ", " + categoria,
                 Toast.LENGTH_LONG).show();
+    }
+
+    private String getCategoria() {
+        String categoria = null;
+
+        switch (radioGroupCategoria.getCheckedRadioButtonId()) {
+            case R.id.radioButtonAlimento:
+                categoria = getString(R.string.alimento);
+                break;
+            case R.id.radioButtonUtensilio:
+                categoria = getString(R.string.utensilio);
+                break;
+            case R.id.radioButtonOutro:
+                categoria = getString(R.string.outro);
+        }
+
+        return categoria;
     }
 }

@@ -20,4 +20,5 @@
     <string name="quilograma">kg</string>
     <string name="mililitro">mL</string>
     <string name="litro">L</string>
+    <string name="categoria_deve_ser_selecionada">A Categoria deve ser selecionada</string>
 </resources>

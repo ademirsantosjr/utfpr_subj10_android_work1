@@ -93,6 +93,7 @@
         android:id="@+id/spinnerUnidadesDeMedida"
         android:layout_width="100dp"
         android:layout_height="45dp"
+        android:spinnerMode="dialog"
         app:layout_constraintEnd_toEndOf="@+id/editTextTipoDeEmbalagem"
         app:layout_constraintStart_toStartOf="@+id/textView6"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
