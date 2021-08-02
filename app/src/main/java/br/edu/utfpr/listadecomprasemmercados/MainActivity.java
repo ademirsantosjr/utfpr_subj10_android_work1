@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this,
                     R.string.marca_do_item_nao_pode_ser_vazia,
                     Toast.LENGTH_LONG).show();
-            editTextNomeDoItem.requestFocus();
+            editTextMarca.requestFocus();
             return;
         }
 
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this,
                     R.string.tipo_de_embalagem_nao_pode_ser_vazio,
                     Toast.LENGTH_LONG).show();
-            editTextNomeDoItem.requestFocus();
+            editTextTipoDeEmbalagem.requestFocus();
             return;
         }
 
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this,
                     R.string.quantidade_na_embalagem_nao_pode_ser_vazia,
                     Toast.LENGTH_LONG).show();
-            editTextNomeDoItem.requestFocus();
+            editTextQuantidadeNaEmbalagem.requestFocus();
             return;
         }
 
@@ -122,7 +122,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this,
                     R.string.categoria_deve_ser_selecionada,
                     Toast.LENGTH_LONG).show();
-            radioGroupCategoria.requestFocus();
             return;
         }
 
