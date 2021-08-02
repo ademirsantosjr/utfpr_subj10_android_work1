@@ -75,7 +75,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName|textCapWords"
+        android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -102,10 +102,9 @@
         android:id="@+id/radioGroupCategoria"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="@+id/editTextQuantidadeNaEmbalagem"
-        app:layout_constraintTop_toBottomOf="@+id/editTextQuantidadeNaEmbalagem">
+        app:layout_constraintTop_toBottomOf="@+id/textView7">
 
         <RadioButton
             android:id="@+id/radioButtonAlimento"
@@ -136,9 +135,9 @@
 
     <Button
         android:id="@+id/buttonLimpar"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:onClick="limparCampos"
         android:text="@string/limpar"
         app:layout_constraintEnd_toEndOf="@+id/editTextTipoDeEmbalagem"
@@ -148,10 +147,19 @@
         android:id="@+id/buttonSalvar"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:onClick="mostrarItemCadastrado"
         android:text="@string/salvar"
         app:layout_constraintStart_toStartOf="@+id/editTextTipoDeEmbalagem"
         app:layout_constraintTop_toBottomOf="@+id/checkBoxItemDeCestaBasica" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/categoria"
+        app:layout_constraintStart_toStartOf="@+id/editTextQuantidadeNaEmbalagem"
+        app:layout_constraintTop_toBottomOf="@+id/editTextQuantidadeNaEmbalagem" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

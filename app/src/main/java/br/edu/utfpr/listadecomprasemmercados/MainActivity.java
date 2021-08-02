@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -16,10 +17,15 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private EditText editTextNomeDoItem;
+    private EditText editTextMarca;
+    private EditText editTextTipoDeEmbalagem;
+    private EditText editTextQuantidadeNaEmbalagem;
 
     private Spinner spinnerUnidadesDeMedida;
 
     private RadioGroup radioGroupCategoria;
+
+    private CheckBox checkBoxItemCestaBasica;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,14 +33,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         editTextNomeDoItem = findViewById(R.id.editTextNomeDoItem);
+        editTextMarca = findViewById(R.id.editTextMarca);
+        editTextTipoDeEmbalagem = findViewById(R.id.editTextTipoDeEmbalagem);
+        editTextQuantidadeNaEmbalagem = findViewById(R.id.editTextQuantidadeNaEmbalagem);
+
         spinnerUnidadesDeMedida = findViewById(R.id.spinnerUnidadesDeMedida);
         radioGroupCategoria = findViewById(R.id.radioGroupCategoria);
+        checkBoxItemCestaBasica = findViewById(R.id.checkBoxItemDeCestaBasica);
 
         popularUnidadesDeMedida();
     }
 
     public void limparCampos(View view) {
         editTextNomeDoItem.setText(null);
+        editTextMarca.setText(null);
+        editTextTipoDeEmbalagem.setText(null);
+        editTextQuantidadeNaEmbalagem.setText(null);
+
+        radioGroupCategoria.clearCheck();
+        checkBoxItemCestaBasica.setChecked(false);
 
         editTextNomeDoItem.requestFocus();
 
@@ -61,11 +78,41 @@ public class MainActivity extends AppCompatActivity {
 
     public void mostrarItemCadastrado(View view) {
         String nomeDoItem = editTextNomeDoItem.getText().toString();
+        String marca = editTextMarca.getText().toString();
+        String tipoDeEmbalagem = editTextTipoDeEmbalagem.getText().toString().toLowerCase();
+        String quantidadeNaEmbalagem = editTextQuantidadeNaEmbalagem.getText().toString();
+
+        String unidadeDeMedida = spinnerUnidadesDeMedida.getSelectedItem().toString();
         String categoria = getCategoria();
+        String itemCestaBasica = "";
 
         if (nomeDoItem == null || nomeDoItem.trim().isEmpty()) {
             Toast.makeText(this,
                     R.string.nome_do_item_nao_pode_ser_vazio,
+                    Toast.LENGTH_LONG).show();
+            editTextNomeDoItem.requestFocus();
+            return;
+        }
+
+        if (marca == null || marca.trim().isEmpty()) {
+            Toast.makeText(this,
+                    R.string.marca_do_item_nao_pode_ser_vazia,
+                    Toast.LENGTH_LONG).show();
+            editTextNomeDoItem.requestFocus();
+            return;
+        }
+
+        if (tipoDeEmbalagem == null || tipoDeEmbalagem.trim().isEmpty()) {
+            Toast.makeText(this,
+                    R.string.tipo_de_embalagem_nao_pode_ser_vazio,
+                    Toast.LENGTH_LONG).show();
+            editTextNomeDoItem.requestFocus();
+            return;
+        }
+
+        if (quantidadeNaEmbalagem == null || quantidadeNaEmbalagem.trim().isEmpty()) {
+            Toast.makeText(this,
+                    R.string.quantidade_na_embalagem_nao_pode_ser_vazia,
                     Toast.LENGTH_LONG).show();
             editTextNomeDoItem.requestFocus();
             return;
@@ -79,8 +126,18 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
+        if (checkBoxItemCestaBasica.isChecked()) {
+            itemCestaBasica = "\n(" + getString(R.string.item_de_cesta_basica).trim() + ")";
+        }
+
         Toast.makeText(this,
-                nomeDoItem.trim() + ", " + categoria,
+                categoria + ": " +
+                        nomeDoItem.trim() + " " +
+                        marca.trim() + ", " +
+                        tipoDeEmbalagem.trim() + " " +
+                        quantidadeNaEmbalagem.trim() +
+                        unidadeDeMedida.trim() +
+                        itemCestaBasica,
                 Toast.LENGTH_LONG).show();
     }
 

@@ -21,4 +21,8 @@
     <string name="mililitro">mL</string>
     <string name="litro">L</string>
     <string name="categoria_deve_ser_selecionada">A Categoria deve ser selecionada</string>
+    <string name="marca_do_item_nao_pode_ser_vazia">Marca do item não poder vazia</string>
+    <string name="tipo_de_embalagem_nao_pode_ser_vazio">Tipo de Embalagem não pode ser vazio</string>
+    <string name="quantidade_na_embalagem_nao_pode_ser_vazia">Quantidade na Embalagem não pode ser vazia</string>
+    <string name="categoria">Categoria</string>
 </resources>
