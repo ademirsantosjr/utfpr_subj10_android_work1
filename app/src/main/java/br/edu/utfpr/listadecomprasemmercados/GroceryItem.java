@@ -5,19 +5,18 @@ public class GroceryItem {
     private String itemName;
     private String itemBrand;
     private String packingType;
-    private double amountInThePackage;
+    private int amountInThePackage;
     private String unitOfMeasurement;
     private Category category;
     private boolean basicItem = false;
 
     public GroceryItem(String itemName, String itemBrand, String packingType,
-                       double amountInThePackage, String unitOfMeasurement, Category category) {
+                       int amountInThePackage, String unitOfMeasurement) {
         this.itemName = itemName;
         this.itemBrand = itemBrand;
         this.packingType = packingType;
         this.amountInThePackage = amountInThePackage;
         this.unitOfMeasurement = unitOfMeasurement;
-        this.category = category;
     }
 
     public String getItemName() {
@@ -60,7 +59,7 @@ public class GroceryItem {
         this.packingType = packingType;
     }
 
-    public void setAmountInThePackage(double amountInThePackage) {
+    public void setAmountInThePackage(int amountInThePackage) {
         this.amountInThePackage = amountInThePackage;
     }
 

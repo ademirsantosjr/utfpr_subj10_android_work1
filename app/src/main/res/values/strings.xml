@@ -1,19 +1,27 @@
 <resources>
-    <string name="app_name">Cadastrar Item de Compra</string>
+    <!--Form-->>
+    <string name="app_name">Lista de Compras</string>
     <string name="nome_do_item">Nome do Item</string>
     <string name="marca">Marca</string>
     <string name="quantidade_na_embalagem">Quantidade na Embalagem</string>
     <string name="unidade_de_medida">Unidade de Medida</string>
     <string name="tipo_de_embalagem">Tipo de Embalagem</string>
+    <string name="categoria">Categoria</string>
     <string name="utensilio">Utensílio</string>
     <string name="alimento">Alimento</string>
     <string name="outro">Outro</string>
     <string name="item_de_cesta_basica">Item de Cesta Básica</string>
-    <string name="limpar">Limpar</string>
+
     <string name="salvar">Salvar</string>
+    <string name="limpar">Limpar</string>
+
     <string name="todos_os_campos_foram_limpos">Todos os campos foram limpos</string>
     <string name="nome_do_item_nao_pode_ser_vazio">Nome do Item não pode ser vazio</string>
-    <string name="categoria">Categoria</string>
+
+    <string name="categoria_deve_ser_selecionada">A Categoria deve ser selecionada</string>
+    <string name="marca_do_item_nao_pode_ser_vazia">Marca do item não poder vazia</string>
+    <string name="tipo_de_embalagem_nao_pode_ser_vazio">Tipo de Embalagem não pode ser vazio</string>
+    <string name="quantidade_na_embalagem_nao_pode_ser_vazia">Quantidade na Embalagem não pode ser vazia</string>
 
     <string name="unidade">un</string>
     <string name="miligrama">mg</string>
@@ -21,8 +29,18 @@
     <string name="quilograma">kg</string>
     <string name="mililitro">mL</string>
     <string name="litro">L</string>
-    <string name="categoria_deve_ser_selecionada">A Categoria deve ser selecionada</string>
-    <string name="marca_do_item_nao_pode_ser_vazia">Marca do item não poder vazia</string>
-    <string name="tipo_de_embalagem_nao_pode_ser_vazio">Tipo de Embalagem não pode ser vazio</string>
-    <string name="quantidade_na_embalagem_nao_pode_ser_vazia">Quantidade na Embalagem não pode ser vazia</string>
+
+    <!--List-->>
+    <string name="arroz">Arroz</string>
+    <string name="acucar">Açúcar</string>
+    <string name="feijao">Feijão</string>
+    <string name="sal">Sal</string>
+    <string name="oleo">Óleo</string>
+    <string name="farinha">Farinha</string>
+    <string name="fuba">Fubá</string>
+    <string name="cafe">Café</string>
+    <string name="leite">Leite</string>
+    <string name="gelatina">Gelatina</string>
+
+    <string name="item_selecionado">"Item selecionado: "</string>
 </resources>

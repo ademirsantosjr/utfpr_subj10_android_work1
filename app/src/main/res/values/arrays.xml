@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="itemsnames">
+        <item>@string/arroz</item>
+        <item>@string/acucar</item>
+        <item>@string/feijao</item>
+        <item>@string/sal</item>
+        <item>@string/oleo</item>
+        <item>@string/farinha</item>
+        <item>@string/fuba</item>
+        <item>@string/cafe</item>
+        <item>@string/leite</item>
+        <item>@string/gelatina</item>
+    </string-array>
+
+    <string-array name="itemsbrands">
+        <item>Camil</item>
+        <item>União</item>
+        <item>Kikaldo</item>
+        <item>Cisne</item>
+        <item>Coamo</item>
+        <item>Yoki</item>
+        <item>Yoki</item>
+        <item>Seleto</item>
+        <item>Tirol</item>
+        <item>Oetker</item>
+    </string-array>
+
+    <string-array name="packingtypes">
+        <item>saco</item>
+        <item>pacote</item>
+        <item>pacote</item>
+        <item>pacote</item>
+        <item>lata</item>
+        <item>pacote</item>
+        <item>pacote</item>
+        <item>pacote</item>
+        <item>caixa</item>
+        <item>caixa</item>
+    </string-array>
+
+    <integer-array name="amounts">
+        <item>5</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>350</item>
+        <item>1</item>
+        <item>30</item>
+    </integer-array>
+    
+    <string-array name="units">
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>L</item>
+        <item>kg</item>
+        <item>kg</item>
+        <item>g</item>
+        <item>L</item>
+        <item>g</item>
+    </string-array>
+</resources>
