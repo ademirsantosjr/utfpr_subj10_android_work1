@@ -38,18 +38,18 @@ public class ListActivity extends AppCompatActivity {
     }
 
     private void populateListOfItems() {
-        String[] itemsnames = getResources().getStringArray(R.array.itemsnames);
-        String[] itemsbrands = getResources().getStringArray(R.array.itemsbrands);
-        String[] packingtypes = getResources().getStringArray(R.array.packingtypes);
+        String[] itemsNames = getResources().getStringArray(R.array.itemsnames);
+        String[] itemsBrands = getResources().getStringArray(R.array.itemsbrands);
+        String[] packingTypes = getResources().getStringArray(R.array.packingtypes);
         int[] amounts= getResources().getIntArray(R.array.amounts);
         String[] units= getResources().getStringArray(R.array.units);
 
-        ArrayList<GroceryItem> groceryItemsitems = new ArrayList<>();
+        ArrayList<GroceryItem> groceryItems = new ArrayList<>();
 
-        for(int i = 0; i < itemsnames.length; i++) {
-            groceryItemsitems.add(new GroceryItem(itemsnames[i],
-                    itemsbrands[i],
-                    packingtypes[i],
+        for(int i = 0; i < itemsNames.length; i++) {
+            groceryItems.add(new GroceryItem(itemsNames[i],
+                    itemsBrands[i],
+                    packingTypes[i],
                     amounts[i],
                     units[i]));
         }
@@ -57,7 +57,7 @@ public class ListActivity extends AppCompatActivity {
         ArrayAdapter<GroceryItem> adapter =
                 new ArrayAdapter<>(this,
                         android.R.layout.simple_list_item_1,
-                        groceryItemsitems);
+                        groceryItems);
 
         listViewGroceryItems.setAdapter(adapter);
     }
