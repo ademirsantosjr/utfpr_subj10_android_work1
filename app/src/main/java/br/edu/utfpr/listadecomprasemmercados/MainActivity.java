@@ -57,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
         FormActivity.addNewItem(this);
     }
 
+    public void openPageAbout(View view) { AboutActivity.about(this); }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -71,8 +73,10 @@ public class MainActivity extends AppCompatActivity {
             int amountInThePackage =
                     Integer.parseInt(bundle.getString(FormActivity.AMOUNT_IN_THE_PACKAGE));
 
+            String category = bundle.getString(FormActivity.CATEGORY);
+
             String unitOfMeasurement = bundle.getString(FormActivity.UNIT_OF_MEASUREMENT);
-            boolean basicItem = Boolean.getBoolean(bundle.getString(FormActivity.BASIC_ITEM));
+            boolean basicItem = bundle.getBoolean(FormActivity.BASIC_ITEM);
 
             groceryItems.add(new GroceryItem(
                     itemName,
@@ -80,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
                     packingType,
                     amountInThePackage,
                     unitOfMeasurement,
+                    category,
                     basicItem
             ));
         }

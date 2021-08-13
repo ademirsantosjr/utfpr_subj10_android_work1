@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextNomeDoItem"
+        android:id="@+id/editTextItemName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -34,11 +34,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/marca"
-        app:layout_constraintStart_toStartOf="@+id/editTextNomeDoItem"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNomeDoItem" />
+        app:layout_constraintStart_toStartOf="@+id/editTextItemName"
+        app:layout_constraintTop_toBottomOf="@+id/editTextItemName" />
 
     <EditText
-        android:id="@+id/editTextMarca"
+        android:id="@+id/editTextBrand"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -55,11 +55,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/quantidade_na_embalagem"
-        app:layout_constraintStart_toStartOf="@+id/editTextTipoDeEmbalagem"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTipoDeEmbalagem" />
+        app:layout_constraintStart_toStartOf="@+id/editTextPackingType"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPackingType" />
 
     <EditText
-        android:id="@+id/editTextQuantidadeNaEmbalagem"
+        android:id="@+id/editTextAmountInThePackage"
         android:layout_width="165dp"
         android:layout_height="0dp"
         android:ems="10"
@@ -73,11 +73,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/tipo_de_embalagem"
-        app:layout_constraintStart_toStartOf="@+id/editTextMarca"
-        app:layout_constraintTop_toBottomOf="@+id/editTextMarca" />
+        app:layout_constraintStart_toStartOf="@+id/editTextBrand"
+        app:layout_constraintTop_toBottomOf="@+id/editTextBrand" />
 
     <EditText
-        android:id="@+id/editTextTipoDeEmbalagem"
+        android:id="@+id/editTextPackingType"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -99,15 +99,18 @@
         app:layout_constraintTop_toTopOf="@+id/textView3" />
 
     <Spinner
-        android:id="@+id/spinnerUnidadesDeMedida"
-        android:layout_width="100dp"
+        android:id="@+id/spinnerUnitOfMeasurement"
+        android:layout_width="0dp"
         android:layout_height="45dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:spinnerMode="dialog"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView6"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <RadioGroup
-        android:id="@+id/radioGroupCategoria"
+        android:id="@+id/radioGroupCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -118,51 +121,59 @@
         app:layout_constraintTop_toBottomOf="@+id/textView7">
 
         <RadioButton
-            android:id="@+id/radioButtonAlimento"
+            android:id="@+id/radioButtonFood"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/alimento" />
+            android:text="@string/food" />
 
         <RadioButton
-            android:id="@+id/radioButtonUtensilio"
+            android:id="@+id/radioButtonUtensils"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/utensilio" />
+            android:text="@string/utensil" />
 
         <RadioButton
-            android:id="@+id/radioButtonOutro"
+            android:id="@+id/radioButtonOther"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/outro" />
+            android:text="@string/other" />
     </RadioGroup>
 
     <CheckBox
-        android:id="@+id/checkBoxItemDeCestaBasica"
+        android:id="@+id/checkBoxBasicItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/item_de_cesta_basica"
-        app:layout_constraintStart_toStartOf="@+id/radioGroupCategoria"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroupCategoria" />
+        app:layout_constraintStart_toStartOf="@+id/radioGroupCategory"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupCategory" />
 
     <Button
         android:id="@+id/buttonLimpar"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:onClick="limparCampos"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:onClick="eraseFields"
         android:text="@string/limpar"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTipoDeEmbalagem"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxItemDeCestaBasica" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/buttonSalvar"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxBasicItem" />
 
     <Button
         android:id="@+id/buttonSalvar"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
-        android:onClick="mostrarItemCadastrado"
+        android:onClick="save"
         android:text="@string/salvar"
-        app:layout_constraintStart_toStartOf="@+id/editTextTipoDeEmbalagem"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxItemDeCestaBasica" />
+        app:layout_constraintEnd_toStartOf="@+id/buttonLimpar"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxBasicItem" />
 
     <TextView
         android:id="@+id/textView7"
@@ -170,7 +181,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/categoria"
-        app:layout_constraintStart_toStartOf="@+id/editTextQuantidadeNaEmbalagem"
-        app:layout_constraintTop_toBottomOf="@+id/editTextQuantidadeNaEmbalagem" />
+        app:layout_constraintStart_toStartOf="@+id/editTextAmountInThePackage"
+        app:layout_constraintTop_toBottomOf="@+id/editTextAmountInThePackage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

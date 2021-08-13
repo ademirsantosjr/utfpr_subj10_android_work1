@@ -7,14 +7,15 @@ public class GroceryItem {
     private String packingType;
     private int amountInThePackage;
     private String unitOfMeasurement;
-    private Category category;
-    private boolean basicItem = false;
+    private String category;
+    private boolean basicItem;
 
     public GroceryItem(String itemName,
                        String itemBrand,
                        String packingType,
                        int amountInThePackage,
                        String unitOfMeasurement,
+                       String category,
                        boolean basicItem) {
 
         this.itemName = itemName;
@@ -22,6 +23,7 @@ public class GroceryItem {
         this.packingType = packingType;
         this.amountInThePackage = amountInThePackage;
         this.unitOfMeasurement = unitOfMeasurement;
+        this.category = category;
         this.basicItem = basicItem;
     }
 
@@ -45,7 +47,7 @@ public class GroceryItem {
         return unitOfMeasurement;
     }
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
@@ -73,7 +75,7 @@ public class GroceryItem {
         this.unitOfMeasurement = unitOfMeasurement;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
@@ -87,6 +89,8 @@ public class GroceryItem {
                 itemBrand + ", " +
                 packingType + " " +
                 amountInThePackage +
-                unitOfMeasurement;
+                unitOfMeasurement + "\n" +
+                "categoria: " + category +
+                (isBasicItem() ? " (cesta básica)" : "");
     }
 }
