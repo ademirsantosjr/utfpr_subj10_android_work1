@@ -10,13 +10,19 @@ public class GroceryItem {
     private Category category;
     private boolean basicItem = false;
 
-    public GroceryItem(String itemName, String itemBrand, String packingType,
-                       int amountInThePackage, String unitOfMeasurement) {
+    public GroceryItem(String itemName,
+                       String itemBrand,
+                       String packingType,
+                       int amountInThePackage,
+                       String unitOfMeasurement,
+                       boolean basicItem) {
+
         this.itemName = itemName;
         this.itemBrand = itemBrand;
         this.packingType = packingType;
         this.amountInThePackage = amountInThePackage;
         this.unitOfMeasurement = unitOfMeasurement;
+        this.basicItem = basicItem;
     }
 
     public String getItemName() {

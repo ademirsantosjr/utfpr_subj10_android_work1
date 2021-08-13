@@ -21,7 +21,7 @@
     <string name="categoria_deve_ser_selecionada">A Categoria deve ser selecionada</string>
     <string name="marca_do_item_nao_pode_ser_vazia">Marca do item não poder vazia</string>
     <string name="tipo_de_embalagem_nao_pode_ser_vazio">Tipo de Embalagem não pode ser vazio</string>
-    <string name="quantidade_na_embalagem_nao_pode_ser_vazia">Quantidade na Embalagem não pode ser vazia</string>
+    <string name="quantity_in_the_package_cannot_be_zero">Quantidade na Embalagem não pode ser 0 (zero)</string>
 
     <string name="unidade">un</string>
     <string name="miligrama">mg</string>
@@ -43,4 +43,8 @@
     <string name="gelatina">Gelatina</string>
 
     <string name="item_selecionado">"Item selecionado: "</string>
+    <string name="novo">Novo</string>
+    <string name="about">About</string>
+    <string name="add_new_item">Novo Item</string>
+    <string name="edit_item">Editar Item</string>
 </resources>
