@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ListView listViewGroceryItems;
 
+    private int selectedPosition = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,13 +32,25 @@ public class MainActivity extends AppCompatActivity {
 
         listViewGroceryItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                GroceryItem groceryItem =
-                        (GroceryItem) listViewGroceryItems.getItemAtPosition(position);
+            public void onItemClick(AdapterView<?> parent,
+                                    View view,
+                                    int position,
+                                    long id) {
 
-                Toast.makeText(getApplicationContext(),
-                        getString(R.string.item_selecionado) + groceryItem.toString(),
-                        Toast.LENGTH_LONG).show();
+                selectedPosition = position;
+                editItem();
+            }
+        });
+
+        listViewGroceryItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent,
+                                           View view,
+                                           int position,
+                                           long id) {
+                selectedPosition = position;
+                editItem();
+                return false;
             }
         });
 
@@ -55,6 +69,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void addNewItem(View view) {
         FormActivity.addNewItem(this);
+    }
+
+    public void editItem() {
+        GroceryItem groceryItem = groceryItems.get(selectedPosition);
+        FormActivity.editItem(this, groceryItem);
     }
 
     public void openPageAbout(View view) { AboutActivity.about(this); }
@@ -76,19 +95,32 @@ public class MainActivity extends AppCompatActivity {
             String category = bundle.getString(FormActivity.CATEGORY);
 
             String unitOfMeasurement = bundle.getString(FormActivity.UNIT_OF_MEASUREMENT);
-            boolean basicItem = bundle.getBoolean(FormActivity.BASIC_ITEM);
+            boolean basicItem = bundle.getBoolean(FormActivity.IS_BASIC_ITEM);
 
-            groceryItems.add(new GroceryItem(
-                    itemName,
-                    itemBrand,
-                    packingType,
-                    amountInThePackage,
-                    unitOfMeasurement,
-                    category,
-                    basicItem
-            ));
+            if (requestCode == FormActivity.EDIT_ITEM) {
+                GroceryItem groceryItem = groceryItems.get(selectedPosition);
+                groceryItem.setItemName(itemName);
+                groceryItem.setItemBrand(itemBrand);
+                groceryItem.setPackingType(packingType);
+                groceryItem.setAmountInThePackage(amountInThePackage);
+                groceryItem.setUnitOfMeasurement(unitOfMeasurement);
+                groceryItem.setCategory(category);
+                groceryItem.setBasicItem(basicItem);
+
+                selectedPosition = -1;
+            } else {
+                groceryItems.add(new GroceryItem(
+                        itemName,
+                        itemBrand,
+                        packingType,
+                        amountInThePackage,
+                        unitOfMeasurement,
+                        category,
+                        basicItem
+                ));
+            }
+
+            listAdapter.notifyDataSetChanged();
         }
-
-        listAdapter.notifyDataSetChanged();
     }
 }

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -25,22 +26,30 @@ public class FormActivity extends AppCompatActivity {
     public static final String AMOUNT_IN_THE_PACKAGE = "AMOUNT_IN_THE_PACKAGE";
     public static final String UNIT_OF_MEASUREMENT = "UNIT_OF_MEASUREMENT";
     public static final String CATEGORY = "CATEGORY";
-    public static final String BASIC_ITEM = "BASIC_ITEM";
+    public static final String IS_BASIC_ITEM = "BASIC_ITEM";
 
     public static final int NEW_ITEM = 1;
+    public static final int EDIT_ITEM = 2;
 
     private EditText editTextItemName;
-    private EditText editTextBrand;
+    private EditText editTextItemBrand;
     private EditText editTextPackingType;
     private EditText editTextAmountInThePackage;
-
     private Spinner spinnerUnitOfMeasurement;
-
     private RadioGroup radioGroupCategory;
-
     private CheckBox checkBoxBasicItem;
 
     private int mode;
+
+    private String currentItemName;
+    private String currentItemBrand;
+    private String currentPackingType;
+    private String currentAmountInThePackage;
+    private String currentUnitOfMeasurement;
+    private String currentCategory;
+    private boolean currentBasicItem;
+
+    private static List<String> listOfUnits;
 
     public static void addNewItem(AppCompatActivity activity) {
         Intent intent = new Intent(activity, FormActivity.class);
@@ -50,13 +59,28 @@ public class FormActivity extends AppCompatActivity {
         activity.startActivityForResult(intent, NEW_ITEM);
     }
 
+    public static void editItem(AppCompatActivity activity, GroceryItem groceryItem) {
+        Intent intent = new Intent(activity, FormActivity.class);
+
+        intent.putExtra(MODE, EDIT_ITEM);
+        intent.putExtra(ITEM_NAME, groceryItem.getItemName());
+        intent.putExtra(ITEM_BRAND, groceryItem.getItemBrand());
+        intent.putExtra(PACKING_TYPE, groceryItem.getPackingType());
+        intent.putExtra(AMOUNT_IN_THE_PACKAGE, String.valueOf((int)groceryItem.getAmountInThePackage()));
+        intent.putExtra(UNIT_OF_MEASUREMENT, groceryItem.getUnitOfMeasurement());
+        intent.putExtra(CATEGORY, groceryItem.getCategory());
+        intent.putExtra(IS_BASIC_ITEM, groceryItem.isBasicItem());
+
+        activity.startActivityForResult(intent, EDIT_ITEM);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
 
         editTextItemName = findViewById(R.id.editTextItemName);
-        editTextBrand = findViewById(R.id.editTextBrand);
+        editTextItemBrand = findViewById(R.id.editTextBrand);
         editTextPackingType = findViewById(R.id.editTextPackingType);
         editTextAmountInThePackage = findViewById(R.id.editTextAmountInThePackage);
 
@@ -67,24 +91,52 @@ public class FormActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
 
+        populateUnitOfMeasurementList();
+
         if (bundle != null) {
             mode = bundle.getInt(MODE, NEW_ITEM);
 
             if (mode == NEW_ITEM) {
                 setTitle(getString(R.string.add_new_item));
             } else {
+                currentItemName = bundle.getString(ITEM_NAME);
+                currentItemBrand = bundle.getString(ITEM_BRAND);
+                currentPackingType = bundle.getString(PACKING_TYPE);
+                currentAmountInThePackage = bundle.getString(AMOUNT_IN_THE_PACKAGE);
+                currentUnitOfMeasurement = bundle.getString(UNIT_OF_MEASUREMENT);
+                currentCategory = bundle.getString(CATEGORY);
+                currentBasicItem = bundle.getBoolean(IS_BASIC_ITEM);
+
+                editTextItemName.setText(currentItemName);
+                editTextItemBrand.setText(currentItemBrand);
+                editTextPackingType.setText(currentPackingType);
+                editTextAmountInThePackage.setText(currentAmountInThePackage);
+
+                int unitPosition = 0;
+                for(String unit : listOfUnits) {
+                    if (unit.equals(currentUnitOfMeasurement)) {
+                        unitPosition = listOfUnits.indexOf(unit);
+                    }
+                }
+                spinnerUnitOfMeasurement.setSelection(unitPosition);
+
+
+                int radioButtonToCheckId =
+                        radioGroupCategory.getChildAt(getIndex(currentCategory)).getId();
+
+                radioGroupCategory.check(radioButtonToCheckId);
+                checkBoxBasicItem.setChecked(currentBasicItem);
+
                 setTitle(getString(R.string.edit_item));
             }
         }
 
         editTextItemName.requestFocus();
-
-        populateUnitOfMeasurementList();
     }
 
     public void eraseFields(View view) {
         editTextItemName.setText(null);
-        editTextBrand.setText(null);
+        editTextItemBrand.setText(null);
         editTextPackingType.setText(null);
         editTextAmountInThePackage.setText(null);
 
@@ -99,30 +151,30 @@ public class FormActivity extends AppCompatActivity {
     }
 
     private void populateUnitOfMeasurementList() {
-        List<String> list = new ArrayList<>();
+        listOfUnits = new ArrayList<>();
 
-        list.add(getString(R.string.unidade));
-        list.add(getString(R.string.miligrama));
-        list.add(getString(R.string.grama));
-        list.add(getString(R.string.quilograma));
-        list.add(getString(R.string.mililitro));
-        list.add(getString(R.string.litro));
+        listOfUnits.add(getString(R.string.unidade));
+        listOfUnits.add(getString(R.string.miligrama));
+        listOfUnits.add(getString(R.string.grama));
+        listOfUnits.add(getString(R.string.quilograma));
+        listOfUnits.add(getString(R.string.mililitro));
+        listOfUnits.add(getString(R.string.litro));
 
         ArrayAdapter<String> adapter =
-                new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
+                new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listOfUnits);
 
         spinnerUnitOfMeasurement.setAdapter(adapter);
     }
 
     public void save(View view) {
         String itemName = editTextItemName.getText().toString();
-        String itemBrand = editTextBrand.getText().toString();
+        String itemBrand = editTextItemBrand.getText().toString();
         String packingType = editTextPackingType.getText().toString().toLowerCase();
 
         String amountInThePackage = editTextAmountInThePackage.getText().toString();
 
         String unitOfMeasurement = spinnerUnitOfMeasurement.getSelectedItem().toString();
-        String category = getCategory();
+        String category = getCheckedCategory();
         boolean basicItem = false;
 
         if (itemName == null || itemName.trim().isEmpty()) {
@@ -137,7 +189,7 @@ public class FormActivity extends AppCompatActivity {
             Toast.makeText(this,
                     R.string.item_brand_cannot_be_empty,
                     Toast.LENGTH_LONG).show();
-            editTextBrand.requestFocus();
+            editTextItemBrand.requestFocus();
             return;
         }
 
@@ -162,7 +214,7 @@ public class FormActivity extends AppCompatActivity {
 
         if (amountInThePackage.contains(".") || amountInThePackage.contains(",")) {
             Toast.makeText(this,
-                    "Quantidade deve conter apenas números redondos",
+                    R.string.only_round_number_allowed,
                     Toast.LENGTH_LONG).show();
             editTextAmountInThePackage.requestFocus();
             return;
@@ -186,14 +238,14 @@ public class FormActivity extends AppCompatActivity {
         intent.putExtra(AMOUNT_IN_THE_PACKAGE, amountInThePackage);
         intent.putExtra(UNIT_OF_MEASUREMENT, unitOfMeasurement);
         intent.putExtra(CATEGORY, category);
-        intent.putExtra(BASIC_ITEM, basicItem);
+        intent.putExtra(IS_BASIC_ITEM, basicItem);
 
         setResult(Activity.RESULT_OK, intent);
 
         finish();
     }
 
-    private String getCategory() {
+    private String getCheckedCategory() {
         String category = null;
 
         switch (radioGroupCategory.getCheckedRadioButtonId()) {
@@ -208,6 +260,21 @@ public class FormActivity extends AppCompatActivity {
         }
 
         return category;
+    }
+
+    private int getIndex(String currentCategory) {
+        int size = radioGroupCategory.getChildCount();
+        int radioButtonIndex = size - 1;
+
+        for (int i = 0; i < size; i++) {
+            if (((RadioButton) radioGroupCategory.getChildAt(i))
+                                                 .getText()
+                                                 .equals(currentCategory)) {
+                radioButtonIndex = i;
+            }
+        }
+
+        return radioButtonIndex;
     }
 
     @Override

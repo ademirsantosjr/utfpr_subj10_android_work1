@@ -53,4 +53,5 @@
     <string name="course">Especialização em Tecnologia Java. Turma XX.</string>
     <string name="author_email">ademir.m.junior@gmail.com</string>
     <string name="about_page_title">Sobre</string>
+    <string name="only_round_number_allowed">Quantidade deve conter número redondo apenas</string>
 </resources>
