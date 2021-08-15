@@ -66,7 +66,11 @@ public class FormActivity extends AppCompatActivity {
         intent.putExtra(ITEM_NAME, groceryItem.getItemName());
         intent.putExtra(ITEM_BRAND, groceryItem.getItemBrand());
         intent.putExtra(PACKING_TYPE, groceryItem.getPackingType());
-        intent.putExtra(AMOUNT_IN_THE_PACKAGE, String.valueOf((int)groceryItem.getAmountInThePackage()));
+
+        intent.putExtra(
+                AMOUNT_IN_THE_PACKAGE, String.valueOf((int)groceryItem.getAmountInThePackage())
+        );
+
         intent.putExtra(UNIT_OF_MEASUREMENT, groceryItem.getUnitOfMeasurement());
         intent.putExtra(CATEGORY, groceryItem.getCategory());
         intent.putExtra(IS_BASIC_ITEM, groceryItem.isBasicItem());
@@ -99,35 +103,8 @@ public class FormActivity extends AppCompatActivity {
             if (mode == NEW_ITEM) {
                 setTitle(getString(R.string.add_new_item));
             } else {
-                currentItemName = bundle.getString(ITEM_NAME);
-                currentItemBrand = bundle.getString(ITEM_BRAND);
-                currentPackingType = bundle.getString(PACKING_TYPE);
-                currentAmountInThePackage = bundle.getString(AMOUNT_IN_THE_PACKAGE);
-                currentUnitOfMeasurement = bundle.getString(UNIT_OF_MEASUREMENT);
-                currentCategory = bundle.getString(CATEGORY);
-                currentBasicItem = bundle.getBoolean(IS_BASIC_ITEM);
-
-                editTextItemName.setText(currentItemName);
-                editTextItemBrand.setText(currentItemBrand);
-                editTextPackingType.setText(currentPackingType);
-                editTextAmountInThePackage.setText(currentAmountInThePackage);
-
-                int unitPosition = 0;
-                for(String unit : listOfUnits) {
-                    if (unit.equals(currentUnitOfMeasurement)) {
-                        unitPosition = listOfUnits.indexOf(unit);
-                    }
-                }
-                spinnerUnitOfMeasurement.setSelection(unitPosition);
-
-
-                int radioButtonToCheckId =
-                        radioGroupCategory.getChildAt(getIndex(currentCategory)).getId();
-
-                radioGroupCategory.check(radioButtonToCheckId);
-                checkBoxBasicItem.setChecked(currentBasicItem);
-
                 setTitle(getString(R.string.edit_item));
+                populateFieldsWithCurrentData(bundle);
             }
         }
 
@@ -262,7 +239,43 @@ public class FormActivity extends AppCompatActivity {
         return category;
     }
 
-    private int getIndex(String currentCategory) {
+    private void populateFieldsWithCurrentData(Bundle bundle) {
+        currentItemName = bundle.getString(ITEM_NAME);
+        currentItemBrand = bundle.getString(ITEM_BRAND);
+        currentPackingType = bundle.getString(PACKING_TYPE);
+        currentAmountInThePackage = bundle.getString(AMOUNT_IN_THE_PACKAGE);
+        currentUnitOfMeasurement = bundle.getString(UNIT_OF_MEASUREMENT);
+        currentCategory = bundle.getString(CATEGORY);
+        currentBasicItem = bundle.getBoolean(IS_BASIC_ITEM);
+
+        editTextItemName.setText(currentItemName);
+        editTextItemBrand.setText(currentItemBrand);
+        editTextPackingType.setText(currentPackingType);
+        editTextAmountInThePackage.setText(currentAmountInThePackage);
+
+        spinnerUnitOfMeasurement.setSelection(findUnitOfMeasurementIndex());
+
+        int radioButtonToCheckId =
+                radioGroupCategory.getChildAt(findCategoryIndex(currentCategory)).getId();
+
+        radioGroupCategory.check(radioButtonToCheckId);
+
+        checkBoxBasicItem.setChecked(currentBasicItem);
+    }
+
+    private int findUnitOfMeasurementIndex() {
+        int unitPosition = 0;
+
+        for(String unit : listOfUnits) {
+            if (unit.equals(currentUnitOfMeasurement)) {
+                unitPosition = listOfUnits.indexOf(unit);
+            }
+        }
+
+        return unitPosition;
+    }
+
+    private int findCategoryIndex(String currentCategory) {
         int size = radioGroupCategory.getChildCount();
         int radioButtonIndex = size - 1;
 
