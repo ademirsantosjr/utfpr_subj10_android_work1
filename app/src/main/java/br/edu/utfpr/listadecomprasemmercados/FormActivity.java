@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -111,7 +112,7 @@ public class FormActivity extends AppCompatActivity {
             if (mode == NEW_ITEM) {
                 setTitle(getString(R.string.add_new_item));
             } else {
-                setTitle(getString(R.string.edit_item));
+                setTitle(getString(R.string.edit));
                 populateFieldsWithCurrentData(bundle);
             }
         }

@@ -5,14 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import androidx.appcompat.view.ActionMode;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,40 +22,91 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private ArrayAdapter<GroceryItem> listAdapter;
-    private List<GroceryItem> groceryItems;
-
-    private ListView listViewGroceryItems;
+    private List<GroceryItem> groceries;
 
     private int selectedPosition = -1;
+
+    private ListView listViewGroceries;
+
+    private ActionMode actionMode;
+
+    private View selectedView;
+
+    private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
+        @Override
+        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            MenuInflater inflater = mode.getMenuInflater();
+            inflater.inflate(R.menu.edit_remove_options, menu);
+            return true;
+        }
+
+        @Override
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            return false;
+        }
+
+        @Override
+        public boolean onActionItemClicked(ActionMode mode, MenuItem menuItem) {
+            switch (menuItem.getItemId()) {
+                case R.id.menuItemEdit:
+                    editGrocery();
+                    mode.finish();
+                    return true;
+
+                case R.id.menuItemRemove:
+                    removeGrocery();
+                    mode.finish();
+                    return true;
+
+                default:
+                    return false;
+            }
+        }
+
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+            if (selectedView != null) {
+                selectedView.setBackgroundColor(Color.TRANSPARENT);
+            }
+
+            actionMode = null;
+            selectedView = null;
+
+            listViewGroceries.setEnabled(true);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        listViewGroceryItems = findViewById(R.id.listViewGroceryItems);
+        listViewGroceries = findViewById(R.id.listViewGroceryItems);
 
-        listViewGroceryItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent,
-                                    View view,
-                                    int position,
-                                    long id) {
+        listViewGroceries.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
-                selectedPosition = position;
-                editItem();
-            }
-        });
-
-        listViewGroceryItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        listViewGroceries.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent,
                                            View view,
                                            int position,
                                            long id) {
+
+                if (actionMode != null) {
+                    return false;
+                }
+
                 selectedPosition = position;
-                editItem();
-                return false;
+
+                view.setBackgroundColor(Color.LTGRAY);
+
+                selectedView = view;
+
+                listViewGroceries.setEnabled(false);
+
+                actionMode = startSupportActionMode(mActionModeCallback);
+
+                return true;
             }
         });
 
@@ -84,18 +137,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void populateListOfItems() {
-        groceryItems = new ArrayList<>();
+        groceries = new ArrayList<>();
 
         listAdapter = new ArrayAdapter<>(this,
-                        android.R.layout.simple_list_item_1,
-                        groceryItems);
+                android.R.layout.simple_list_item_1,
+                groceries);
 
-        listViewGroceryItems.setAdapter(listAdapter);
+        listViewGroceries.setAdapter(listAdapter);
     }
 
-    public void editItem() {
-        GroceryItem groceryItem = groceryItems.get(selectedPosition);
-        FormActivity.editItem(this, groceryItem);
+    public void editGrocery() {
+        GroceryItem grocery = groceries.get(selectedPosition);
+        FormActivity.editItem(this, grocery);
+    }
+
+    public void removeGrocery() {
+        groceries.remove(selectedPosition);
+        listAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -118,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
             boolean basicItem = bundle.getBoolean(FormActivity.IS_BASIC_ITEM);
 
             if (requestCode == FormActivity.EDIT_ITEM) {
-                GroceryItem groceryItem = groceryItems.get(selectedPosition);
+                GroceryItem groceryItem = groceries.get(selectedPosition);
                 groceryItem.setItemName(itemName);
                 groceryItem.setItemBrand(itemBrand);
                 groceryItem.setPackingType(packingType);
@@ -129,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
 
                 selectedPosition = -1;
             } else {
-                groceryItems.add(new GroceryItem(
+                groceries.add(new GroceryItem(
                         itemName,
                         itemBrand,
                         packingType,

@@ -46,7 +46,8 @@
     <string name="add">Adicionar</string>
     <string name="about">Sobre</string>
     <string name="add_new_item">Novo Item</string>
-    <string name="edit_item">Editar Item</string>
+    <string name="edit">Editar</string>
+    <string name="remove">Excluir</string>
     <string name="purpose">Aplicativo para Controle de Compras em Mercados</string>
     <string name="developed_by">Desenvolvido por:</string>
     <string name="author">Ademir Martins dos Santos Junior</string>
