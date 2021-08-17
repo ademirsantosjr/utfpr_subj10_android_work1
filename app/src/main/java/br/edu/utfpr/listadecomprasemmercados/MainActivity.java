@@ -1,10 +1,13 @@
 package br.edu.utfpr.listadecomprasemmercados;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -57,6 +60,29 @@ public class MainActivity extends AppCompatActivity {
         populateListOfItems();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_options, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.menuItemAdd:
+                FormActivity.addNewItem(this);
+                return true;
+
+            case R.id.menuItemAbout:
+                AboutActivity.about(this);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     private void populateListOfItems() {
         groceryItems = new ArrayList<>();
 
@@ -67,16 +93,10 @@ public class MainActivity extends AppCompatActivity {
         listViewGroceryItems.setAdapter(listAdapter);
     }
 
-    public void addNewItem(View view) {
-        FormActivity.addNewItem(this);
-    }
-
     public void editItem() {
         GroceryItem groceryItem = groceryItems.get(selectedPosition);
         FormActivity.editItem(this, groceryItem);
     }
-
-    public void openPageAbout(View view) { AboutActivity.about(this); }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

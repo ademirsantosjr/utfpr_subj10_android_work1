@@ -143,37 +143,10 @@
         android:id="@+id/checkBoxBasicItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="@string/item_de_cesta_basica"
         app:layout_constraintStart_toStartOf="@+id/radioGroupCategory"
         app:layout_constraintTop_toBottomOf="@+id/radioGroupCategory" />
-
-    <Button
-        android:id="@+id/buttonLimpar"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:onClick="eraseFields"
-        android:text="@string/limpar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/buttonSalvar"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxBasicItem" />
-
-    <Button
-        android:id="@+id/buttonSalvar"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:onClick="save"
-        android:text="@string/salvar"
-        app:layout_constraintEnd_toStartOf="@+id/buttonLimpar"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxBasicItem" />
 
     <TextView
         android:id="@+id/textView7"

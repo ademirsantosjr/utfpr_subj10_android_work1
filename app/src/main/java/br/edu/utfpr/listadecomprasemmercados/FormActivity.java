@@ -1,10 +1,13 @@
 package br.edu.utfpr.listadecomprasemmercados;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -111,7 +114,30 @@ public class FormActivity extends AppCompatActivity {
         editTextItemName.requestFocus();
     }
 
-    public void eraseFields(View view) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.add_edit_options, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.menuItemSave:
+                save();
+                return true;
+
+            case R.id.menuItemClearFields:
+                eraseFields();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void eraseFields() {
         editTextItemName.setText(null);
         editTextItemBrand.setText(null);
         editTextPackingType.setText(null);
@@ -143,7 +169,7 @@ public class FormActivity extends AppCompatActivity {
         spinnerUnitOfMeasurement.setAdapter(adapter);
     }
 
-    public void save(View view) {
+    public void save() {
         String itemName = editTextItemName.getText().toString();
         String itemBrand = editTextItemBrand.getText().toString();
         String packingType = editTextPackingType.getText().toString().toLowerCase();

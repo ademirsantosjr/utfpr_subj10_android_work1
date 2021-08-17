@@ -12,8 +12,8 @@
     <string name="other">Outro</string>
     <string name="item_de_cesta_basica">Item de Cesta Básica</string>
 
-    <string name="salvar">Salvar</string>
-    <string name="limpar">Limpar</string>
+    <string name="save">Salvar</string>
+    <string name="clear_fields">Limpar</string>
 
     <string name="all_fields_were_erased">Todos os campos foram limpos</string>
     <string name="item_name_cannot_be_empty">Nome do Item não pode ser vazio</string>
