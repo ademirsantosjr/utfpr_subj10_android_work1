@@ -1,11 +1,15 @@
 package br.edu.utfpr.listadecomprasemmercados;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -83,6 +87,11 @@ public class FormActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
 
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
         editTextItemName = findViewById(R.id.editTextItemName);
         editTextItemBrand = findViewById(R.id.editTextBrand);
         editTextPackingType = findViewById(R.id.editTextPackingType);
@@ -103,7 +112,7 @@ public class FormActivity extends AppCompatActivity {
             if (mode == NEW_ITEM) {
                 setTitle(getString(R.string.add_new_item));
             } else {
-                setTitle(getString(R.string.edit_item));
+                setTitle(getString(R.string.edit));
                 populateFieldsWithCurrentData(bundle);
             }
         }
@@ -111,7 +120,7 @@ public class FormActivity extends AppCompatActivity {
         editTextItemName.requestFocus();
     }
 
-    public void eraseFields(View view) {
+    public void eraseFields() {
         editTextItemName.setText(null);
         editTextItemBrand.setText(null);
         editTextPackingType.setText(null);
@@ -143,7 +152,7 @@ public class FormActivity extends AppCompatActivity {
         spinnerUnitOfMeasurement.setAdapter(adapter);
     }
 
-    public void save(View view) {
+    public void save() {
         String itemName = editTextItemName.getText().toString();
         String itemBrand = editTextItemBrand.getText().toString();
         String packingType = editTextPackingType.getText().toString().toLowerCase();
@@ -294,5 +303,32 @@ public class FormActivity extends AppCompatActivity {
     public void onBackPressed() {
         setResult(Activity.RESULT_CANCELED);
         finish();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.form_options, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.menuItemSave:
+                save();
+                return true;
+
+            case R.id.menuItemClearFields:
+                eraseFields();
+                return true;
+
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
