@@ -1,11 +1,17 @@
 package br.edu.utfpr.listadecomprasemmercados;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.ActionMode;
 import android.view.Menu;
@@ -16,9 +22,11 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class FormActivity extends AppCompatActivity {
@@ -39,6 +47,7 @@ public class FormActivity extends AppCompatActivity {
     private EditText editTextItemBrand;
     private EditText editTextPackingType;
     private EditText editTextAmountInThePackage;
+
     private Spinner spinnerUnitOfMeasurement;
     private RadioGroup radioGroupCategory;
     private CheckBox checkBoxBasicItem;
@@ -52,8 +61,6 @@ public class FormActivity extends AppCompatActivity {
     private String currentUnitOfMeasurement;
     private String currentCategory;
     private boolean currentBasicItem;
-
-    private static List<String> listOfUnits;
 
     public static void addNewItem(AppCompatActivity activity) {
         Intent intent = new Intent(activity, FormActivity.class);
@@ -137,17 +144,10 @@ public class FormActivity extends AppCompatActivity {
     }
 
     private void populateUnitOfMeasurementList() {
-        listOfUnits = new ArrayList<>();
-
-        listOfUnits.add(getString(R.string.unidade));
-        listOfUnits.add(getString(R.string.miligrama));
-        listOfUnits.add(getString(R.string.grama));
-        listOfUnits.add(getString(R.string.quilograma));
-        listOfUnits.add(getString(R.string.mililitro));
-        listOfUnits.add(getString(R.string.litro));
-
-        ArrayAdapter<String> adapter =
-                new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listOfUnits);
+        ArrayAdapter<CharSequence> adapter =
+                ArrayAdapter.createFromResource(this,
+                                                R.array.unitsofmeasurement,
+                                                android.R.layout.simple_list_item_1);
 
         spinnerUnitOfMeasurement.setAdapter(adapter);
     }
@@ -275,6 +275,9 @@ public class FormActivity extends AppCompatActivity {
     private int findUnitOfMeasurementIndex() {
         int unitPosition = 0;
 
+        List<String> listOfUnits =
+                Arrays.asList(getResources().getStringArray(R.array.unitsofmeasurement));
+
         for(String unit : listOfUnits) {
             if (unit.equals(currentUnitOfMeasurement)) {
                 unitPosition = listOfUnits.indexOf(unit);
@@ -315,6 +318,7 @@ public class FormActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         switch (item.getItemId()) {
+
             case R.id.menuItemSave:
                 save();
                 return true;

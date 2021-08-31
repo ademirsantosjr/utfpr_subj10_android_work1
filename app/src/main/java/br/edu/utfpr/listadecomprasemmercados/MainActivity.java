@@ -4,9 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+
 import androidx.appcompat.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,11 +21,16 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String FILE = "br.edu.utfpr.listadecomprasemmercados.SETTINGS";
+    public static final String SHOW_BASICS = "SHOW_BASICS";
+
     private ArrayAdapter<GroceryItem> listAdapter;
-    private List<GroceryItem> groceries;
+    private List<GroceryItem> groceries = new ArrayList<>();
+    private List<GroceryItem> filteredShoppingList = new ArrayList<>();
 
     private int selectedPosition = -1;
 
@@ -31,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     private ActionMode actionMode;
 
     private View selectedView;
+
+    private boolean isChosenOnlyBasicItems = false;
 
     private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
         @Override
@@ -47,7 +57,9 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem menuItem) {
+
             switch (menuItem.getItemId()) {
+
                 case R.id.menuItemEdit:
                     editGrocery();
                     mode.finish();
@@ -110,7 +122,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        populateListOfItems();
+        readPreferences();
+        populateShoppingList();
     }
 
     @Override
@@ -123,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         switch (item.getItemId()) {
+
             case R.id.menuItemAdd:
                 FormActivity.addNewItem(this);
                 return true;
@@ -131,19 +145,79 @@ public class MainActivity extends AppCompatActivity {
                 AboutActivity.about(this);
                 return true;
 
+            case R.id.menuItemSettings:
+                SettingsActivity.settings(this);
+                return true;
+
+            case R.id.menuItemOnlyBasics:
+                item.setChecked(!item.isChecked());
+                saveOnlyBasicsPreference(item.isChecked());
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    private void populateListOfItems() {
-        groceries = new ArrayList<>();
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
 
-        listAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1,
-                groceries);
+        MenuItem menuItem;
 
-        listViewGroceries.setAdapter(listAdapter);
+        menuItem = menu.findItem(R.id.menuItemOnlyBasics);
+        menuItem.setChecked(isChosenOnlyBasicItems);
+
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    private void readPreferences() {
+        SharedPreferences sharedPreferences = getSharedPreferences(FILE, Context.MODE_PRIVATE);
+
+        isChosenOnlyBasicItems = sharedPreferences.getBoolean(SHOW_BASICS, isChosenOnlyBasicItems);
+
+        populateShoppingList();
+    }
+
+    private void saveOnlyBasicsPreference(boolean newValue) {
+        SharedPreferences sharedPreferences = getSharedPreferences(FILE, Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putBoolean(SHOW_BASICS, newValue);
+
+        editor.commit();
+
+        isChosenOnlyBasicItems = newValue;
+
+        populateShoppingList();
+    }
+
+    private void populateShoppingList() {
+
+        if (isChosenOnlyBasicItems) {
+
+            filteredShoppingList.clear();
+
+            for (GroceryItem groceryItem : groceries) {
+                if (groceryItem.isBasicItem() == true) {
+                    filteredShoppingList.add(groceryItem);
+                }
+            }
+
+            listAdapter = new ArrayAdapter<>(this,
+                    android.R.layout.simple_list_item_1,
+                    filteredShoppingList);
+            listViewGroceries.setAdapter(listAdapter);
+
+        } else {
+
+            listAdapter = new ArrayAdapter<>(this,
+                    android.R.layout.simple_list_item_1,
+                    groceries);
+            listViewGroceries.setAdapter(listAdapter);
+        }
+
+        listAdapter.notifyDataSetChanged();
     }
 
     public void editGrocery() {
@@ -198,7 +272,7 @@ public class MainActivity extends AppCompatActivity {
                 ));
             }
 
-            listAdapter.notifyDataSetChanged();
+            populateShoppingList();
         }
     }
 }

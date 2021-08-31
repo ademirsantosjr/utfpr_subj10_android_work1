@@ -55,4 +55,12 @@
     <string name="author_email">ademir.m.junior@gmail.com</string>
     <string name="about_page_title">Sobre</string>
     <string name="only_round_number_allowed">Quantidade deve conter número redondo apenas</string>
+    <string name="general">Geral</string>
+    <string name="dark_theme">Tema Escuro</string>
+    <string name="enable_dark_theme">Habilita o Tema Escuro do Aparelho</string>
+    <string name="show_item_category">Mostrar Categoria</string>
+    <string name="show_item_category_in_shopping_list">Mostra a categoria do item na lista de compras</string>
+    <string name="settings">Preferências</string>
+    <string name="title_settings">Preferências</string>
+    <string name="only_basic_items">Cesta Básica</string>
 </resources>

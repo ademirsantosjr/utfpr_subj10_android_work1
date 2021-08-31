@@ -13,17 +13,13 @@
         <item>@string/gelatina</item>
     </string-array>
 
-    <string-array name="itemsbrands">
-        <item>Camil</item>
-        <item>União</item>
-        <item>Kikaldo</item>
-        <item>Cisne</item>
-        <item>Coamo</item>
-        <item>Yoki</item>
-        <item>Yoki</item>
-        <item>Seleto</item>
-        <item>Tirol</item>
-        <item>Oetker</item>
+    <string-array name="unitsofmeasurement">
+        <item>@string/unidade</item>
+        <item>@string/miligrama</item>
+        <item>@string/grama</item>
+        <item>@string/quilograma</item>
+        <item>@string/mililitro</item>
+        <item>@string/litro</item>
     </string-array>
 
     <string-array name="packingtypes">
