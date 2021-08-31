@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Lista de Compras</string>
+    <string name="nome_do_item">Nome do Item</string>
+    <string name="marca">Marca</string>
+    <string name="quantidade_na_embalagem">Quantidade na Embalagem</string>
+    <string name="unidade_de_medida">Unidade de Medida</string>
+    <string name="tipo_de_embalagem">Tipo de Embalagem</string>
+    <string name="categoria">Categoria</string>
+    <string name="utensil">Utensílio</string>
+    <string name="food">Alimento</string>
+    <string name="other">Outro</string>
+    <string name="item_de_cesta_basica">Item de Cesta Básica</string>
+    <string name="all_fields_were_erased">Todos os campos foram limpos</string>
+    <string name="item_name_cannot_be_empty">Nome do Item não pode ser vazio</string>
+    <string name="category_must_be_informed">A Categoria deve ser selecionada</string>
+    <string name="item_brand_cannot_be_empty">Marca do item não poder vazia</string>
+    <string name="packing_type_cannot_be_empty">Tipo de Embalagem não pode ser vazio</string>
+    <string name="quantity_in_the_package_cannot_be_zero">Quantidade na Embalagem não pode ser 0 (zero)</string>
+    <string name="only_round_number_allowed">Quantidade deve conter número redondo apenas</string>
+    <string name="only_basic_items">Cesta Básica</string>
+    <string name="unidade">un</string>
+    <string name="miligrama">mg</string>
+    <string name="grama">g</string>
+    <string name="quilograma">kg</string>
+    <string name="mililitro">mL</string>
+    <string name="litro">L</string>
+    <string name="add">Adicionar</string>
+    <string name="about">Sobre</string>
+    <string name="add_new_item">Novo Item</string>
+    <string name="edit">Editar</string>
+    <string name="remove">Excluir</string>
+    <string name="purpose">Aplicativo para Controle de Compras em Mercados</string>
+    <string name="developed_by">Desenvolvido por:</string>
+    <string name="course">Especialização em Tecnologia Java. Turma XX.</string>
+    <string name="about_page_title">Sobre</string>
+    <string name="save">Salvar</string>
+    <string name="clear_fields">Limpar Campos</string>
+</resources>
