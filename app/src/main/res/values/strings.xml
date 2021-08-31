@@ -1,28 +1,32 @@
 <resources>
     <!--Form-->>
-    <string name="app_name">Lista de Compras</string>
-    <string name="nome_do_item">Nome do Item</string>
-    <string name="marca">Marca</string>
-    <string name="quantidade_na_embalagem">Quantidade na Embalagem</string>
-    <string name="unidade_de_medida">Unidade de Medida</string>
-    <string name="tipo_de_embalagem">Tipo de Embalagem</string>
-    <string name="categoria">Categoria</string>
-    <string name="utensil">Utensílio</string>
-    <string name="food">Alimento</string>
-    <string name="other">Outro</string>
-    <string name="item_de_cesta_basica">Item de Cesta Básica</string>
+    <string name="app_name">Shopping List</string>
+    <string name="nome_do_item">Item Name</string>
+    <string name="marca">Brand</string>
+    <string name="quantidade_na_embalagem">Quantity in the Package</string>
+    <string name="unidade_de_medida">Unit of Measurement</string>
+    <string name="tipo_de_embalagem">Packing Type</string>
+    <string name="categoria">Category</string>
+    <string name="utensil">Utensil</string>
+    <string name="food">Food</string>
+    <string name="other">Other</string>
+    <string name="item_de_cesta_basica">Basic Item</string>
 
-    <string name="save">Salvar</string>
-    <string name="clear_fields">Limpar</string>
+    <string name="all_fields_were_erased">All fields have been cleared</string>
+    <string name="item_name_cannot_be_empty">Item Name cannot be empty</string>
 
-    <string name="all_fields_were_erased">Todos os campos foram limpos</string>
-    <string name="item_name_cannot_be_empty">Nome do Item não pode ser vazio</string>
+    <string name="category_must_be_informed">A Category must be chosen</string>
+    <string name="item_brand_cannot_be_empty">Item Brand cannot be empty</string>
+    <string name="packing_type_cannot_be_empty">Packing Type cannot be empty</string>
+    <string name="quantity_in_the_package_cannot_be_zero">Quantity in the Package cannot be 0 (zero)</string>
 
-    <string name="category_must_be_informed">A Categoria deve ser selecionada</string>
-    <string name="item_brand_cannot_be_empty">Marca do item não poder vazia</string>
-    <string name="packing_type_cannot_be_empty">Tipo de Embalagem não pode ser vazio</string>
-    <string name="quantity_in_the_package_cannot_be_zero">Quantidade na Embalagem não pode ser 0 (zero)</string>
+    <string name="only_round_number_allowed">Quantity: only round number is allowed</string>
+    <string name="only_basic_items">Only Basic Items</string>
 
+    <string name="save">Save</string>
+    <string name="clear_fields">Clear Fields</string>
+
+    <!-- Units of Measurement -->
     <string name="unidade">un</string>
     <string name="miligrama">mg</string>
     <string name="grama">g</string>
@@ -30,37 +34,18 @@
     <string name="mililitro">mL</string>
     <string name="litro">L</string>
 
-    <!--List-->>
-    <string name="arroz">Arroz</string>
-    <string name="acucar">Açúcar</string>
-    <string name="feijao">Feijão</string>
-    <string name="sal">Sal</string>
-    <string name="oleo">Óleo</string>
-    <string name="farinha">Farinha</string>
-    <string name="fuba">Fubá</string>
-    <string name="cafe">Café</string>
-    <string name="leite">Leite</string>
-    <string name="gelatina">Gelatina</string>
+    <!-- Menu Main Activity -->
+    <string name="add">Add</string>
+    <string name="about">About</string>
+    <string name="add_new_item">New Item</string>
+    <string name="edit">Edit</string>
+    <string name="remove">Remove</string>
 
-    <string name="item_selecionado">"Item selecionado: "</string>
-    <string name="add">Adicionar</string>
-    <string name="about">Sobre</string>
-    <string name="add_new_item">Novo Item</string>
-    <string name="edit">Editar</string>
-    <string name="remove">Excluir</string>
-    <string name="purpose">Aplicativo para Controle de Compras em Mercados</string>
-    <string name="developed_by">Desenvolvido por:</string>
-    <string name="author">Ademir Martins dos Santos Junior</string>
-    <string name="course">Especialização em Tecnologia Java. Turma XX.</string>
-    <string name="author_email">ademir.m.junior@gmail.com</string>
-    <string name="about_page_title">Sobre</string>
-    <string name="only_round_number_allowed">Quantidade deve conter número redondo apenas</string>
-    <string name="general">Geral</string>
-    <string name="dark_theme">Tema Escuro</string>
-    <string name="enable_dark_theme">Habilita o Tema Escuro do Aparelho</string>
-    <string name="show_item_category">Mostrar Categoria</string>
-    <string name="show_item_category_in_shopping_list">Mostra a categoria do item na lista de compras</string>
-    <string name="settings">Preferências</string>
-    <string name="title_settings">Preferências</string>
-    <string name="only_basic_items">Cesta Básica</string>
+    <!-- Page 'About' -->
+    <string name="purpose">Shopping List Application</string>
+    <string name="developed_by">Developed by:</string>
+    <string name="author" translatable="false">Ademir Martins dos Santos Junior</string>
+    <string name="course">Java Technology Specialization Course. Class XX.</string>
+    <string name="author_email" translatable="false">ademir.m.junior@gmail.com</string>
+    <string name="about_page_title">About</string>
 </resources>

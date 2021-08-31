@@ -13,9 +13,6 @@
         android:enabled="true"
         android:title="@string/only_basic_items" />
     <item
-        android:id="@+id/menuItemSettings"
-        android:title="@string/settings" />
-    <item
         android:id="@+id/menuItemAbout"
         android:title="@string/about" />
 </menu>

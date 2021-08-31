@@ -21,7 +21,6 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -143,10 +142,6 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.menuItemAbout:
                 AboutActivity.about(this);
-                return true;
-
-            case R.id.menuItemSettings:
-                SettingsActivity.settings(this);
                 return true;
 
             case R.id.menuItemOnlyBasics:
