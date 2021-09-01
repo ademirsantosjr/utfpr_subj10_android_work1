@@ -20,6 +20,9 @@ import android.widget.Toast;
 import java.util.Arrays;
 import java.util.List;
 
+import br.edu.utfpr.listadecomprasemmercados.model.Grocery;
+import br.edu.utfpr.listadecomprasemmercados.persistence.GroceriesDatabase;
+
 public class FormActivity extends AppCompatActivity {
 
     public static final String MODE = "MODE";
@@ -61,21 +64,25 @@ public class FormActivity extends AppCompatActivity {
         activity.startActivityForResult(intent, NEW_ITEM);
     }
 
-    public static void editItem(AppCompatActivity activity, GroceryItem groceryItem) {
+    public static void editGrocery(AppCompatActivity activity, int selectedPosition) {
+        GroceriesDatabase groceriesDatabase = GroceriesDatabase.getDatabase(activity);
+
+        Grocery grocery = groceriesDatabase.groceryDao().queryForId(selectedPosition);
+
         Intent intent = new Intent(activity, FormActivity.class);
 
         intent.putExtra(MODE, EDIT_ITEM);
-        intent.putExtra(ITEM_NAME, groceryItem.getItemName());
-        intent.putExtra(ITEM_BRAND, groceryItem.getItemBrand());
-        intent.putExtra(PACKING_TYPE, groceryItem.getPackingType());
+        intent.putExtra(ITEM_NAME, grocery.getItemName());
+        intent.putExtra(ITEM_BRAND, grocery.getItemBrand());
+        intent.putExtra(PACKING_TYPE, grocery.getPackingType());
 
         intent.putExtra(
-                AMOUNT_IN_THE_PACKAGE, String.valueOf((int)groceryItem.getAmountInThePackage())
+                AMOUNT_IN_THE_PACKAGE, String.valueOf((int) grocery.getAmountInThePackage())
         );
 
-        intent.putExtra(UNIT_OF_MEASUREMENT, groceryItem.getUnitOfMeasurement());
-        intent.putExtra(CATEGORY, groceryItem.getCategory());
-        intent.putExtra(IS_BASIC_ITEM, groceryItem.isBasicItem());
+        intent.putExtra(UNIT_OF_MEASUREMENT, grocery.getUnitOfMeasurement());
+        intent.putExtra(CATEGORY, grocery.getCategory());
+        intent.putExtra(IS_BASIC_ITEM, grocery.isBasicItem());
 
         activity.startActivityForResult(intent, EDIT_ITEM);
     }

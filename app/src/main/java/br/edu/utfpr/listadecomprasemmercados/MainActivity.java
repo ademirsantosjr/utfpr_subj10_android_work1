@@ -22,14 +22,17 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.utfpr.listadecomprasemmercados.model.Grocery;
+import br.edu.utfpr.listadecomprasemmercados.persistence.GroceriesDatabase;
+
 public class MainActivity extends AppCompatActivity {
 
     public static final String FILE = "br.edu.utfpr.listadecomprasemmercados.SETTINGS";
     public static final String SHOW_BASICS = "SHOW_BASICS";
 
-    private ArrayAdapter<GroceryItem> listAdapter;
-    private List<GroceryItem> groceries = new ArrayList<>();
-    private List<GroceryItem> filteredShoppingList = new ArrayList<>();
+    private ArrayAdapter<Grocery> listAdapter;
+    private List<Grocery> groceriesList;
+    private List<Grocery> filteredGroceriesList = new ArrayList<>();
 
     private int selectedPosition = -1;
 
@@ -156,7 +159,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-
         MenuItem menuItem;
 
         menuItem = menu.findItem(R.id.menuItemOnlyBasics);
@@ -169,8 +171,6 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(FILE, Context.MODE_PRIVATE);
 
         isChosenOnlyBasicItems = sharedPreferences.getBoolean(SHOW_BASICS, isChosenOnlyBasicItems);
-
-        populateShoppingList();
     }
 
     private void saveOnlyBasicsPreference(boolean newValue) {
@@ -188,41 +188,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void populateShoppingList() {
+        GroceriesDatabase groceriesDatabase = GroceriesDatabase.getDatabase(this);
 
         if (isChosenOnlyBasicItems) {
-
-            filteredShoppingList.clear();
-
-            for (GroceryItem groceryItem : groceries) {
-                if (groceryItem.isBasicItem() == true) {
-                    filteredShoppingList.add(groceryItem);
-                }
-            }
-
-            listAdapter = new ArrayAdapter<>(this,
-                    android.R.layout.simple_list_item_1,
-                    filteredShoppingList);
-            listViewGroceries.setAdapter(listAdapter);
-
+            groceriesList = groceriesDatabase.groceryDao().findBasicItemsOnly(true);
         } else {
-
-            listAdapter = new ArrayAdapter<>(this,
-                    android.R.layout.simple_list_item_1,
-                    groceries);
-            listViewGroceries.setAdapter(listAdapter);
+            groceriesList = groceriesDatabase.groceryDao().queryAll();
         }
 
-        listAdapter.notifyDataSetChanged();
+        listAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1,
+                groceriesList);
+
+        listViewGroceries.setAdapter(listAdapter);
     }
 
     public void editGrocery() {
-        GroceryItem grocery = groceries.get(selectedPosition);
-        FormActivity.editItem(this, grocery);
+        int groceryToEditId = groceriesList.get(selectedPosition).getId();
+        FormActivity.editGrocery(this, groceryToEditId);
     }
 
     public void removeGrocery() {
-        groceries.remove(selectedPosition);
-        listAdapter.notifyDataSetChanged();
+        GroceriesDatabase groceriesDatabase = GroceriesDatabase.getDatabase(this);
+
+        int groceryToDeleteId = groceriesList.get(selectedPosition).getId();
+        Grocery grocery = groceriesDatabase.groceryDao().queryForId(groceryToDeleteId);
+
+        groceriesDatabase.groceryDao().delete(grocery);
+
+        populateShoppingList();
     }
 
     @Override
@@ -244,27 +238,30 @@ public class MainActivity extends AppCompatActivity {
             String unitOfMeasurement = bundle.getString(FormActivity.UNIT_OF_MEASUREMENT);
             boolean basicItem = bundle.getBoolean(FormActivity.IS_BASIC_ITEM);
 
+            GroceriesDatabase groceriesDatabase = GroceriesDatabase.getDatabase(this);
+
             if (requestCode == FormActivity.EDIT_ITEM) {
-                GroceryItem groceryItem = groceries.get(selectedPosition);
-                groceryItem.setItemName(itemName);
-                groceryItem.setItemBrand(itemBrand);
-                groceryItem.setPackingType(packingType);
-                groceryItem.setAmountInThePackage(amountInThePackage);
-                groceryItem.setUnitOfMeasurement(unitOfMeasurement);
-                groceryItem.setCategory(category);
-                groceryItem.setBasicItem(basicItem);
+                int groceryToEditId = groceriesList.get(selectedPosition).getId();
+
+                Grocery grocery = groceriesDatabase.groceryDao().queryForId(groceryToEditId);
+
+                grocery.setItemName(itemName);
+                grocery.setItemBrand(itemBrand);
+                grocery.setPackingType(packingType);
+                grocery.setAmountInThePackage(amountInThePackage);
+                grocery.setUnitOfMeasurement(unitOfMeasurement);
+                grocery.setCategory(category);
+                grocery.setIsBasicItem(basicItem);
+
+                groceriesDatabase.groceryDao().update(grocery);
 
                 selectedPosition = -1;
             } else {
-                groceries.add(new GroceryItem(
-                        itemName,
-                        itemBrand,
-                        packingType,
-                        amountInThePackage,
-                        unitOfMeasurement,
-                        category,
-                        basicItem
-                ));
+                Grocery grocery  = new Grocery(itemName, itemBrand, packingType,
+                                               amountInThePackage, unitOfMeasurement, category,
+                                               basicItem);
+
+                groceriesDatabase.groceryDao().insert(grocery);
             }
 
             populateShoppingList();

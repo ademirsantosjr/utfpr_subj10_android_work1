@@ -1,16 +1,16 @@
 <resources>
     <!--Form-->>
     <string name="app_name">Shopping List</string>
-    <string name="nome_do_item">Item Name</string>
-    <string name="marca">Brand</string>
-    <string name="quantidade_na_embalagem">Quantity in the Package</string>
-    <string name="unidade_de_medida">Unit of Measurement</string>
-    <string name="tipo_de_embalagem">Packing Type</string>
-    <string name="categoria">Category</string>
+    <string name="item_name">Item Name</string>
+    <string name="brand">Brand</string>
+    <string name="quantity_in_the_package">Quantity in the Package</string>
+    <string name="unit_of_measurement">Unit of Measurement</string>
+    <string name="packing_type">Packing Type</string>
+    <string name="category">Category</string>
     <string name="utensil">Utensil</string>
     <string name="food">Food</string>
     <string name="other">Other</string>
-    <string name="item_de_cesta_basica">Basic Item</string>
+    <string name="basic_item">Basic Item</string>
 
     <string name="all_fields_were_erased">All fields have been cleared</string>
     <string name="item_name_cannot_be_empty">Item Name cannot be empty</string>
