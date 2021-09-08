@@ -48,4 +48,10 @@
     <string name="course">Java Technology Specialization Course. Class XX.</string>
     <string name="author_email" translatable="false">ademir.m.junior@gmail.com</string>
     <string name="about_page_title">About</string>
+
+    <!-- Confirmation Dialog -->
+    <string name="confirm_removal">Confirm Removal</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

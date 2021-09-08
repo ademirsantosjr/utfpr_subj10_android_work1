@@ -36,4 +36,8 @@
     <string name="about_page_title">Sobre</string>
     <string name="save">Salvar</string>
     <string name="clear_fields">Limpar Campos</string>
+    <string name="confirm_removal">Confirmar Remoção</string>
+    <string name="are_you_sure">Tem certeza?</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
 </resources>

@@ -1,13 +1,16 @@
 package br.edu.utfpr.listadecomprasemmercados;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.appcompat.view.ActionMode;
@@ -24,6 +27,7 @@ import java.util.List;
 
 import br.edu.utfpr.listadecomprasemmercados.model.Grocery;
 import br.edu.utfpr.listadecomprasemmercados.persistence.GroceriesDatabase;
+import br.edu.utfpr.listadecomprasemmercados.utils.UtilsGUI;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -123,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-
+        
         readPreferences();
         populateShoppingList();
     }
@@ -209,14 +213,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void removeGrocery() {
+        String message = getString(R.string.are_you_sure);
         GroceriesDatabase groceriesDatabase = GroceriesDatabase.getDatabase(this);
-
         int groceryToDeleteId = groceriesList.get(selectedPosition).getId();
-        Grocery grocery = groceriesDatabase.groceryDao().queryForId(groceryToDeleteId);
 
-        groceriesDatabase.groceryDao().delete(grocery);
+        DialogInterface.OnClickListener listener =
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
-        populateShoppingList();
+                        switch(which) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                            Grocery grocery = groceriesDatabase.groceryDao()
+                                                               .queryForId(groceryToDeleteId);
+
+                            groceriesDatabase.groceryDao().delete(grocery);
+                            populateShoppingList();
+                            break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                break;
+                        }
+                    }
+                };
+
+        UtilsGUI.confirmAction(this, message, listener);
     }
 
     @Override
