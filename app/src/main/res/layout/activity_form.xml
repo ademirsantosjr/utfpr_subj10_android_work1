@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:text="@string/nome_do_item"
+        android:text="@string/item_name"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/marca"
+        android:text="@string/brand"
         app:layout_constraintStart_toStartOf="@+id/editTextItemName"
         app:layout_constraintTop_toBottomOf="@+id/editTextItemName" />
 
@@ -55,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/quantidade_na_embalagem"
+        android:text="@string/quantity_in_the_package"
         app:layout_constraintStart_toStartOf="@+id/editTextPackingType"
         app:layout_constraintTop_toBottomOf="@+id/editTextPackingType" />
 
@@ -73,7 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/tipo_de_embalagem"
+        android:text="@string/packing_type"
         app:layout_constraintStart_toStartOf="@+id/editTextBrand"
         app:layout_constraintTop_toBottomOf="@+id/editTextBrand" />
 
@@ -95,7 +95,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:text="@string/unidade_de_medida"
+        android:text="@string/unit_of_measurement"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textViewAmountInThePackage" />
 
@@ -145,7 +145,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/item_de_cesta_basica"
+        android:text="@string/basic_item"
         app:layout_constraintStart_toStartOf="@+id/radioGroupCategory"
         app:layout_constraintTop_toBottomOf="@+id/radioGroupCategory" />
 
@@ -154,7 +154,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/categoria"
+        android:text="@string/category"
         app:layout_constraintStart_toStartOf="@+id/editTextAmountInThePackage"
         app:layout_constraintTop_toBottomOf="@+id/editTextAmountInThePackage" />
 

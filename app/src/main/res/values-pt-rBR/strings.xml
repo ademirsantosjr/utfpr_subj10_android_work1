@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Lista de Compras</string>
-    <string name="nome_do_item">Nome do Item</string>
-    <string name="marca">Marca</string>
-    <string name="quantidade_na_embalagem">Quantidade na Embalagem</string>
-    <string name="unidade_de_medida">Unidade de Medida</string>
-    <string name="tipo_de_embalagem">Tipo de Embalagem</string>
-    <string name="categoria">Categoria</string>
+    <string name="item_name">Nome do Item</string>
+    <string name="brand">Marca</string>
+    <string name="quantity_in_the_package">Quantidade na Embalagem</string>
+    <string name="unit_of_measurement">Unidade de Medida</string>
+    <string name="packing_type">Tipo de Embalagem</string>
+    <string name="category">Categoria</string>
     <string name="utensil">Utensílio</string>
     <string name="food">Alimento</string>
     <string name="other">Outro</string>
-    <string name="item_de_cesta_basica">Item de Cesta Básica</string>
+    <string name="basic_item">Item de Cesta Básica</string>
     <string name="all_fields_were_erased">Todos os campos foram limpos</string>
     <string name="item_name_cannot_be_empty">Nome do Item não pode ser vazio</string>
     <string name="category_must_be_informed">A Categoria deve ser selecionada</string>
@@ -36,4 +36,8 @@
     <string name="about_page_title">Sobre</string>
     <string name="save">Salvar</string>
     <string name="clear_fields">Limpar Campos</string>
+    <string name="confirm_removal">Confirmar Remoção</string>
+    <string name="are_you_sure">Tem certeza?</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
 </resources>

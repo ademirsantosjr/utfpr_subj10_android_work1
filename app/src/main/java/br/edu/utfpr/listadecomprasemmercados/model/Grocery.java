@@ -1,22 +1,45 @@
-package br.edu.utfpr.listadecomprasemmercados;
+package br.edu.utfpr.listadecomprasemmercados.model;
 
-public class GroceryItem {
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+@Entity
+public class Grocery {
+
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+
+    @NonNull
     private String itemName;
-    private String itemBrand;
-    private String packingType;
-    private int amountInThePackage;
-    private String unitOfMeasurement;
-    private String category;
-    private boolean basicItem;
 
-    public GroceryItem(String itemName,
-                       String itemBrand,
-                       String packingType,
-                       int amountInThePackage,
-                       String unitOfMeasurement,
-                       String category,
-                       boolean basicItem) {
+    @NonNull
+    private String itemBrand;
+
+    @NonNull
+    private String packingType;
+
+    @NonNull
+    private int amountInThePackage;
+
+    @NonNull
+    private String unitOfMeasurement;
+
+    @NonNull
+    private String category;
+
+    private boolean isBasicItem;
+
+    public Grocery() {
+    }
+
+    public Grocery(String itemName,
+                   String itemBrand,
+                   String packingType,
+                   int amountInThePackage,
+                   String unitOfMeasurement,
+                   String category,
+                   boolean isBasicItem) {
 
         this.itemName = itemName;
         this.itemBrand = itemBrand;
@@ -24,8 +47,10 @@ public class GroceryItem {
         this.amountInThePackage = amountInThePackage;
         this.unitOfMeasurement = unitOfMeasurement;
         this.category = category;
-        this.basicItem = basicItem;
+        this.isBasicItem = isBasicItem;
     }
+
+    public int getId() { return id; }
 
     public String getItemName() {
         return itemName;
@@ -39,7 +64,7 @@ public class GroceryItem {
         return packingType;
     }
 
-    public double getAmountInThePackage() {
+    public int getAmountInThePackage() {
         return amountInThePackage;
     }
 
@@ -52,8 +77,10 @@ public class GroceryItem {
     }
 
     public boolean isBasicItem() {
-        return basicItem;
+        return isBasicItem;
     }
+
+    public void setId(int id) { this.id = id; }
 
     public void setItemName(String itemName) {
         this.itemName = itemName;
@@ -79,8 +106,8 @@ public class GroceryItem {
         this.category = category;
     }
 
-    public void setBasicItem(boolean basicItem) {
-        this.basicItem = basicItem;
+    public void setIsBasicItem(boolean basicItem) {
+        this.isBasicItem = basicItem;
     }
 
     @Override
@@ -89,8 +116,8 @@ public class GroceryItem {
                 itemBrand + ", " +
                 packingType + " " +
                 amountInThePackage +
-                unitOfMeasurement + "\n" +
+                unitOfMeasurement; /* + "\n" +
                 "categoria: " + category +
-                (isBasicItem() ? " (cesta básica)" : "");
+                (isBasicItem() ? " (cesta básica)" : "");*/
     }
 }
